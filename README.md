@@ -5,3 +5,8 @@ The Javascript based Memory Card Game which i made for "Internet and Web Develop
 
 Internet and Web Development dersi ödevi olarak Javascript ile yazdığım Hafıza Kartı oyunu.
 
+Demo
+--
+
+http://demo.emreakay.com/memory-game/
+
