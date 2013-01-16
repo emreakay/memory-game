@@ -1,0 +1,191 @@
+<!-- Emre Akay 2009.03.01.010 -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Emre Akay 2009.03.01.010</title>
+<style type="text/css">
+img {
+	height: 140px;
+	width: 140px;
+}
+
+div{
+	margin-left:auto;
+	margin-right:auto;
+	width:100px;
+	}
+</style>
+</head>
+
+<body>
+
+<table width="560" border="1" align="center" cellpadding="3" cellspacing="0" bordercolor="#CCCCCC">
+  <tr>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+  </tr>
+  <tr>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+  </tr>
+  <tr>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+  </tr>
+  <tr>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+    <td><img src="bg.png" onclick="tiklandi(this)" id="1" name=""></td>
+  </tr>
+</table>
+
+
+<div class="buton">
+
+<input type="button" id="button"  value="Başlat" onclick="baslat(this)"/>
+
+</div>
+
+<script>
+
+/*
+Emre Akay
+
+*/
+
+	imgs = document.getElementsByTagName("img")
+	
+	
+	
+	
+	var sirala = new Array();
+	for (i=1;i<9;i++)
+		sirala[i]=0
+	
+	
+	
+	aktif1=false
+	lock=0
+	basladi=0
+	basarili=0
+	
+	
+	// rondom sıralama
+	j=0
+	
+	for (e in imgs){
+		
+		
+
+		randomSayi = Math.floor((Math.random()*8)+1); 
+		
+		while(sirala[randomSayi]==2 && j<16)
+		{
+			randomSayi = Math.floor((Math.random()*8)+1); 
+		}
+		sirala[randomSayi]++	
+		
+		imgs[j].id = j
+		imgs[j].name = randomSayi
+		
+		
+		//alert("rnd " + randomSayi + " j " + j)
+		
+		j++
+		//alert(j +" "+ randomSayi)
+	}
+	
+	function baslat(tag){
+		
+		basladi=1
+		tag.value=basladi;
+		zamanlama = setInterval(function(){tag.value=++basladi},1000)
+		
+		}
+
+	
+	
+	
+	function tiklandi(tag){
+		if(lock==0 && basladi!=0)
+		{
+			lock=1
+			tiklandim(tag)		
+		}
+		else{
+			if (basladi==0)
+				alert("Oyunu başlat")
+			else
+				alert("Az bekle")
+			}
+		
+	}
+	
+
+	function tiklandim(tag){
+		
+					
+		tag.src=tag.name+".png"
+		
+		if(aktif1===false)
+		{
+			// ilk kart sa
+			aktif1=tag.id
+			//alert("ilk kart")
+			lock=0
+		}
+		else
+		{
+			// 2. kartsa
+			if(document.getElementById(aktif1).name===tag.name)
+			{
+				// eğer kartlar aynıysa
+				aktif1=false	
+				//alert("aynı")	
+				lock=0
+				basarili++
+				//alert(basarili)
+				
+				if (basarili==8){
+					clearInterval(zamanlama)
+					alert("Oyunu "+basladi+" saniyede bitirdiniz. Tebrikler")
+				}
+			}
+			else
+			{
+				//farklıysa
+				// biraz bekle sonra kapat
+				var x=aktif1
+				setTimeout(function(){
+								
+					document.getElementById(x).src="bg.png"
+					tag.src="bg.png"
+					lock=0
+					aktif1=false
+					},300)
+					
+				
+				//alert(aktif1)
+				
+			}	
+			
+		}
+				
+
+		
+	}
+
+</script>
+
+
+</body>
+</html>
